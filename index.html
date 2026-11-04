@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MUHAMMADDIYOR+ — Shaxsiy Portfolio, Ilmiy Blog & Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --bg-light: #f3f2ee;
+      --bg-dark: #070708;
+      --text-dark: #111111;
+      --text-light: #f5f5f7;
+      --font-display: 'Anton', Impact, sans-serif;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* PRELOADER */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #050506;
+      color: #fff;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .preloader-wrap {
+      position: relative;
+      width: 340px;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .preloader-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .preloader-title {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.55rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #fff;
+      z-index: 2;
+      text-align: center;
+    }
+    .preloader-sub {
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #888;
+      letter-spacing: 0.15em;
+      text-align: center;
+    }
+
+    /* TOP NAVBAR */
+    header.navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      padding: 0 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      mix-blend-mode: difference;
+      color: #fff;
+    }
+    .brand-logo {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: var(--bg-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 95px;
+      overflow: hidden;
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3.8rem, 12.2vw, 11.2rem);
+      line-height: 0.92;
+      text-align: center;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #141414;
+      z-index: 2;
+      user-select: none;
+    }
+    .hero-silhouette-wrap {
+      position: relative;
+      margin-top: -35px;
+      width: clamp(280px, 34vw, 460px);
+      height: clamp(320px, 42vh, 470px);
+      z-index: 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .hero-location {
+      position: absolute;
+      left: 42px;
+      bottom: 42px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #333;
+      z-index: 4;
+    }
+    .hero-bio-box {
+      position: absolute;
+      right: 42px;
+      bottom: 42px;
+      max-width: 340px;
+      text-align: right;
+      z-index: 4;
+    }
+    .hero-bio-text {
+      font-size: 0.76rem;
+      line-height: 1.55;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #1e1e1e;
+      margin-bottom: 16px;
+    }
+    .hero-skills {
+      list-style: none;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* ABOUT ME PORTAL SECTION */
+    .about-pin-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #101114;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .starry-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .about-split-text {
+      position: absolute;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      pointer-events: none;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    }
+    .portal-box {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      background: #060608;
+      border: 1px solid rgba(255,255,255,0.22);
+      z-index: 3;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 36px 48px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.85);
+    }
+    .portal-spotlight {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .portal-ui {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      color: #fff;
+    }
+    .portal-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding-bottom: 18px;
+    }
+    .portal-motto {
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      max-width: 680px;
+      line-height: 1.3;
+    }
+    .portal-status {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: #aaa;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .portal-bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 22px;
+    }
+    .portal-bio-details {
+      max-width: 650px;
+    }
+    .portal-bio-meta {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #999;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .portal-bio-paragraph {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #e2e2e2;
+    }
+    .portal-social-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .btn-pill.primary {
+      background: #ffffff;
+      color: #09090b;
+      border: 1px solid #ffffff;
+    }
+    .btn-pill.outline {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    .btn-pill:hover {
+      transform: translateY(-2px);
+    }
+
+    /* EXPERIENCE HORIZONTAL SCROLL */
+    .exp-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #070708;
+      color: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .exp-bg-marquee {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 17vw, 16rem);
+      color: rgba(255,255,255,0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      line-height: 0.9;
+    }
+    .exp-track {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: stretch;
+      gap: 60px;
+      padding: 0 8vw;
+      width: max-content;
+    }
+    .exp-card {
+      width: clamp(320px, 42vw, 560px);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
+    }
+    .exp-num {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #888;
+      letter-spacing: 0.14em;
+      margin-bottom: 18px;
+    }
+    .exp-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+      line-height: 0.96;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .exp-desc {
+      font-size: 0.9rem;
+      color: #bbb;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .exp-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 18px;
+      font-size: 0.75rem;
+      color: #999;
+    }
+
+    /* THREE.JS WAVY RIBBON SECTION */
+    .projects-wave-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 84px 42px 48px;
+    }
+    .wave-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      z-index: 4;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .wave-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.2vw, 3.8rem);
+      text-transform: uppercase;
+    }
+    #wave-canvas-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+    .wave-quick-btns {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .wave-footer {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* WORKS '26 WHEEL SECTION */
+    .works-wheel-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #efeee9;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1400px;
+    }
+    .wheel-center-label {
+      position: relative;
+      z-index: 5;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #111;
+      background: rgba(239,238,233,0.88);
+      padding: 10px 20px;
+      border-radius: 4px;
+    }
+    .wheel-stage {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+    .wheel-card {
+      position: absolute;
+      width: 320px;
+      height: 195px;
+      background: #141416;
+      color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.14);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      transform-origin: center center;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .wheel-card:hover {
+      border-color: #ffffff;
+      box-shadow: 0 22px 55px rgba(0,0,0,0.35);
+    }
+    .wheel-card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: #aaa;
+      text-transform: uppercase;
+    }
+    .wheel-card-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
+    }
+    .wheel-card-action {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .wheel-side-info {
+      position: absolute;
+      right: 42px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      text-align: right;
+      color: #333;
+      line-height: 1.9;
+      z-index: 6;
+      background: rgba(243,242,238,0.85);
+      padding: 16px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .wheel-side-info a {
+      color: #111;
+      text-decoration: none;
+      cursor: pointer;
+      display: block;
+    }
+    .wheel-side-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* LIFE / SHAXSIY MEDIA BO'LIMI */
+    .life-section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: #09090b;
+      color: #ffffff;
+      padding: 110px 42px 90px;
+      overflow: hidden;
+    }
+    .life-bg-watermark {
+      position: absolute;
+      top: 40px;
+      right: -20px;
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 18vw, 16rem);
+      color: rgba(255,255,255,0.03);
+      line-height: 0.85;
+      pointer-events: none;
+      user-select: none;
+      text-transform: uppercase;
+    }
+    .life-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .life-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding-bottom: 28px;
+    }
+    .life-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #9ca3af;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .life-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+    .life-subtext {
+      margin-top: 12px;
+      font-size: 0.92rem;
+      color: #a1a1aa;
+      max-width: 520px;
+      line-height: 1.6;
+    }
+    .life-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .life-filter-group {
+      display: flex;
+      background: rgba(255,255,255,0.06);
+      padding: 5px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .life-filter-btn {
+      background: transparent;
+      color: #bbb;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .life-filter-btn.active {
+      background: #ffffff;
+      color: #09090b;
+      font-weight: 700;
+    }
+
+    /* LIFE GALLERY GRID */
+    .life-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 24px;
+    }
+    .life-empty-box {
+      grid-column: 1 / -1;
+      border: 1px dashed rgba(255,255,255,0.22);
+      border-radius: 18px;
+      padding: 64px 24px;
+      text-align: center;
+      background: rgba(255,255,255,0.02);
+    }
+    .life-empty-box h4 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .life-empty-box p {
+      color: #888;
+      font-size: 0.88rem;
+      max-width: 460px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+    .life-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #141418;
+      border: 1px solid rgba(255,255,255,0.12);
+      aspect-ratio: 4 / 5;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .life-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.45);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+    }
+    .life-card img,
+    .life-card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .life-card:hover img,
+    .life-card:hover video {
+      transform: scale(1.05);
+    }
+    .life-card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(9, 9, 11, 0.78);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.18);
+      z-index: 3;
+    }
+    .life-card-delete {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(220, 38, 38, 0.85);
+      color: #fff;
+      border: none;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 4;
+    }
+    .life-card:hover .life-card-delete {
+      opacity: 1;
+    }
+    .life-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px;
+      z-index: 2;
+    }
+    .life-card-date {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      color: #a1a1aa;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .life-card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .life-card-caption {
+      font-size: 0.82rem;
+      color: #d4d4d8;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* SERVICES & FOOTER */
+    .services-section {
+      padding: 110px 42px;
+      background: var(--bg-light);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .services-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+    .service-item {
+      border: 1px solid #d5d4ce;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      background: #fff;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .service-item.active {
+      background: #0d0d0f;
+      color: #fff;
+      border-color: #0d0d0f;
+    }
+    .service-header {
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .service-body {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 28px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #b5b5b5;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .service-item.active .service-body {
+      max-height: 200px;
+      padding: 0 28px 24px;
+    }
+
+    /* FOOTER LET'S TALK */
+    .footer-section {
+      background: #070708;
+      color: #fff;
+      padding: 90px 42px 80px;
+      text-align: center;
+    }
+    .footer-big-title {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 15vw, 13rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+    .footer-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: #666;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+    }
+
+    /* FLOATING BAR */
+    .floating-controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 900;
+      background: rgba(12, 12, 14, 0.92);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 8px 14px;
+      border-radius: 999px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+    }
+    .ctrl-btn {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: none;
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .ctrl-btn:hover, .ctrl-btn.active {
+      background: #fff;
+      color: #000;
+    }
+
+    /* MODALS */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.84);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-card {
+      background: #121215;
+      color: #fff;
+      width: 100%;
+      max-width: 680px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 32px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .article-reader-card {
+      max-width: 860px;
+      background: #141418;
+      line-height: 1.7;
+    }
+    .article-reader-card h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .article-reader-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .article-reader-body h4 {
+      margin: 20px 0 8px;
+      color: #f3f4f6;
+      font-size: 1.05rem;
+    }
+    .article-reader-body p {
+      margin-bottom: 12px;
+      color: #d1d5db;
+      font-size: 0.94rem;
+    }
+    .article-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.8rem;
+    }
+    .article-table th, .article-table td {
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .article-table th {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: #1c1c21;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+    }
+    .file-drop-area {
+      border: 2px dashed rgba(255,255,255,0.25);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(255,255,255,0.03);
+      transition: border-color 0.2s;
+    }
+    .file-drop-area:hover {
+      border-color: #fff;
+    }
+
+    /* LIGHTBOX VIEWER */
+    .lightbox-card {
+      max-width: 960px;
+      background: #0b0b0e;
+      padding: 24px;
+    }
+    .lightbox-media-box {
+      width: 100%;
+      max-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .lightbox-media-box img,
+    .lightbox-media-box video {
+      max-width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+    }
+
+    @media (max-width: 768px) {
+      header.navbar { padding: 0 18px; }
+      .nav-links { display: none; }
+      .hero-location, .hero-bio-box {
+        position: static;
+        text-align: center;
+        margin: 14px auto;
+      }
+      .wheel-side-info {
+        position: static;
+        transform: none;
+        margin-top: 20px;
+      }
+      .life-section { padding: 80px 20px; }
+      .floating-controls {
+        width: 94%;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. PRELOADER -->
+  <div id="preloader">
+    <div class="preloader-wrap">
+      <svg class="preloader-svg" viewBox="0 0 300 300">
+        <path id="wavy-ring" fill="none" stroke="#ffffff" stroke-width="2" />
+        <circle id="ring-dot" r="4.5" fill="#ffffff" />
+      </svg>
+      <div>
+        <div class="preloader-title">MUHAMMADDIYOR.</div>
+        <div class="preloader-sub">YUKLANMOQDA 100%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="brand-logo" onclick="replayPreloader()">MUHAMMADDIYOR+</div>
+    <ul class="nav-links">
+      <li><a onclick="scrollToSec('#hero-sec')">Bosh sahifa</a></li>
+      <li><a onclick="scrollToSec('#about-sec')">Men haqimda</a></li>
+      <li><a onclick="scrollToSec('#wave-sec')">Ilmiy Maqolalar</a></li>
+      <li><a onclick="scrollToSec('#wheel-sec')">Loyihalar '26</a></li>
+      <li><a onclick="scrollToSec('#life-sec')">📸 Life (Rasm/Video)</a></li>
+      <li><a onclick="scrollToSec('#footer-sec')">Aloqa</a></li>
+    </ul>
+  </header>
+
+  <!-- 2. HERO SECTION -->
+  <section class="hero-section" id="hero-sec">
+    <h1 class="hero-headline" id="ui-hero-title">SHAXSIY<br>PORTFOLIO</h1>
+
+    <div class="hero-silhouette-wrap" id="hero-NeedParallax">
+      <svg viewBox="0 0 400 450" width="100%" height="100%">
+        <defs>
+          <radialGradient id="rimLight" cx="50%" cy="35%" r="55%">
+            <stop offset="0%" stop-color="#2a2a2a"/>
+            <stop offset="70%" stop-color="#0a0a0a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+        </defs>
+        <path d="M70,450 C75,355 120,320 165,305 C165,280 160,260 155,240 C135,220 130,175 138,135 C145,90 170,65 200,65 C230,65 255,90 262,135 C270,175 265,220 245,240 C240,260 235,280 235,305 C280,320 325,355 330,450 Z"
+              fill="url(#rimLight)" stroke="#ffffff" stroke-width="3.5" />
+      </svg>
+    </div>
+
+    <div class="hero-location" id="ui-hero-location">O'ZBEKISTON // TIIAME MTU • TADQIQOTCHI & IJODKOR</div>
+
+    <div class="hero-bio-box">
+      <p class="hero-bio-text">
+        ZAMONAVIY VEB-TEXNOLOGIYALAR, SUN'IY INTELLEKT VA ILMIY-IQTISODIY TADQIQOTLAR UYG'UNLIGI.
+      </p>
+      <ul class="hero-skills">
+        <li>ASOSIY YO'NALISHLAR:</li>
+        <li>• TURIZM IQTISODIYOTI VA SI TAHLILI</li>
+        <li>• PSIXOLINGVISTIKA VA BILINGVIZM</li>
+        <li>• SHAXSIY BLOG & LIFE VLOG</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. ABOUT ME PORTAL SECTION -->
+  <section class="about-pin-section" id="about-sec">
+    <svg class="starry-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <rect width="1440" height="900" fill="#141619"/>
+      <g stroke="rgba(255,255,255,0.18)" fill="none" stroke-width="2">
+        <circle cx="280" cy="210" r="45"/><circle cx="280" cy="210" r="75" stroke-dasharray="12 8"/>
+        <circle cx="1120" cy="190" r="55"/><circle cx="1120" cy="190" r="95" stroke-dasharray="15 10"/>
+        <circle cx="720" cy="130" r="35"/><circle cx="720" cy="130" r="65" stroke-dasharray="8 6"/>
+        <path d="M0,380 Q360,260 720,380 T1440,360" stroke-width="3"/>
+        <path d="M0,410 Q360,290 720,410 T1440,390" stroke-dasharray="10 6"/>
+      </g>
+      <polygon points="0,900 0,680 120,680 145,520 170,680 220,640 245,440 275,640 330,690 480,740 1440,780 1440,900" fill="#07080a"/>
+    </svg>
+
+    <div class="about-split-text">
+      <span id="split-left">MEN</span>
+      <span id="split-right">HAQIMDA</span>
+    </div>
+
+    <div class="portal-box" id="portal-box">
+      <div class="portal-spotlight">
+        <svg viewBox="0 0 600 600" width="100%" height="100%">
+          <defs>
+            <linearGradient id="beamGrad" x1="100%" y1="0%" x2="35%" y2="85%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.42)"/>
+              <stop offset="60%" stop-color="rgba(255,255,255,0.12)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+          </defs>
+          <polygon points="480,0 600,0 360,460 210,460" fill="url(#beamGrad)"/>
+          <path d="M275,360 C278,325 292,300 310,295 C315,280 308,265 298,262 C288,260 280,272 275,288 C262,305 258,335 260,360 Z" fill="#ffffff" filter="drop-shadow(0 0 16px #fff)"/>
+        </svg>
+      </div>
+
+      <div class="portal-ui" id="portal-ui">
+        <div class="portal-top-bar">
+          <div class="portal-motto">
+            KREATIV G'OYALARNI TEZKOR VA INTERAKTIV RAQAMLI LOYIHALARGA AYLANTIRAMAN
+          </div>
+          <div class="portal-status">● HAMKORLIK VA MULOQOT UCHUN OCHIQ</div>
+        </div>
+
+        <div class="portal-bottom-bar">
+          <div class="portal-bio-details">
+            <div class="portal-bio-meta">KIMSANOV MUHAMMADDIYOR • ILMIY TADQIQOTLAR • AI • LIFE</div>
+            <p class="portal-bio-paragraph">
+              Men zamonaviy veb-texnologiyalar, sun'iy intellekt imkoniyatlari hamda amaliy biznes loyihalarini yaratish bilan shug'ullanaman. Ushbu platformada o'z tajribalarim, ilmiy-tahliliy maqolalarim va shaxsiy hayotimdagi lavhalar bilan bo'lishib boraman.
+            </p>
+          </div>
+
+          <div class="portal-social-btns">
+            <a href="https://t.me/erenyx" target="_blank" rel="noopener noreferrer" class="btn-pill primary">
+              <span>● TELEGRAM (@erenyx)</span>
+            </a>
+            <a href="https://instagram.com/kiimsanov_" target="_blank" rel="noopener noreferrer" class="btn-pill outline">
+              <span>INSTAGRAM (@kiimsanov_) ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EXPERIENCE HORIZONTAL SCROLL -->
+  <section class="exp-section" id="exp-sec">
+    <div class="exp-bg-marquee">MUHAMMADDIYOR KIMSANOV • RESEARCH & LIFE •</div>
+    <div class="exp-track" id="exp-track">
+      <div class="exp-card">
+        <div>
+          <div class="exp-num">01 / ILMIY FAOLIYAT</div>
+          <h3 class="exp-title">TURIZM VA<br>IQTISODIY TAHLIL</h3>
+          <p class="exp-desc">O'zbekistonda turistlar oqimi va xizmatlar eksportining statistik tahlili hamda mahalliy xizmatlarni sun'iy intellekt yordamida muvofiqlashtirish.</p>
+        </div>
+        <div class="exp-meta-grid">
+          <div><strong>MA'LUMOTLAR BAZASI</strong><br>SIAT (2020–2025)</div>
+          <div><strong>YONDASHUV</strong><br>SI tavsiya mexanizmi</div>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div>
+          <div class="exp-num">02 / TADQIQOT</div>
+          <h3 class="exp-title">PSIXOLINGVISTIKA<br>VA MULOQOT</h3>
+          <p class="exp-desc">O'zbek va ingliz tillarida hissiyotlarni ifodalashda hissiy rezonans hamda kommunikativ erkinlik mezonlarini 50 nafar respondent misolida o'rganish.</p>
+        </div>
+        <div class="exp-meta-grid">
+          <div><strong>EMPIRIK BAZA</strong><br>50 nafar respondent</div>
+          <div><strong>KONSEPSIYA</strong><br>Hissiy masofalanish</div>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div>
+          <div class="exp-num">03 / SHAXSIY HAYOT & MEDIA</div>
+          <h3 class="exp-title">LIFE GALEREYA<br>RASM VA VIDEO</h3>
+          <p class="exp-desc">Kundalik hayot, sayohatlar, muhim lahzalar va AI yordamida yaratilgan kreativ videolarni yagona shaxsiy arxivda jamlash.</p>
+        </div>
+        <div class="exp-meta-grid">
+          <div><strong>FORMAT</strong><br>Foto & Video Vlog</div>
+          <div><strong>PLATFORMA</strong><br>Muhammaddiyor+</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THREE.JS WAVY 3D PROJECTS SECTION -->
+  <section class="projects-wave-section" id="wave-sec">
+    <div class="wave-header">
+      <h2 class="wave-title">TANLANGAN LOYIHALAR VA MAQOLALAR</h2>
+      <div class="wave-quick-btns">
+        <button class="btn-pill primary" style="background:#111;color:#fff;" onclick="openProjectReader(1)">📄 1. Turizm va SI maqolasini o'qish</button>
+        <button class="btn-pill primary" style="background:#1e293b;color:#fff;" onclick="openProjectReader(2)">📄 2. Psixolingvistika maqolasini o'qish</button>
+      </div>
+    </div>
+    <div id="wave-canvas-container"></div>
+    <div class="wave-footer">
+      <h3 class="wave-title" style="font-size: 1.6rem;">ILMIY MAQOLALAR VA SHAXSIY ISHLANMALAR</h3>
+      <button class="btn-pill primary" onclick="openAddProjectModal()" style="background:#111;color:#fff;">+ YANGI LOYIHA QO'SHISH</button>
+    </div>
+  </section>
+
+  <!-- 6. WORKS '26 WHEEL SECTION -->
+  <section class="works-wheel-section" id="wheel-sec">
+    <div class="wheel-center-label">LOYIHALAR '26</div>
+    <div class="wheel-stage" id="wheel-stage"></div>
+    <div class="wheel-side-info" id="wheel-side-list"></div>
+  </section>
+
+  <!-- 7. LIFE / RASM VA VIDEOLAR BO'LIMI -->
+  <section class="life-section" id="life-sec">
+    <div class="life-bg-watermark">LIFE ARCHIVE</div>
+
+    <div class="life-container">
+      <div class="life-top-row">
+        <div>
+          <div class="life-tag">04 // SHAXSIY ARXIV VA VLOG</div>
+          <h2 class="life-heading">LIFE — RASM VA VIDEOLAR</h2>
+          <p class="life-subtext">
+            Shaxsiy hayotimdagi unutilmas lahzalar, fotosuratlar va videolar jamlanmasi. Har bir rasm yoki videoni bitta-bitta joylab borish mumkin.
+          </p>
+        </div>
+
+        <div class="life-controls">
+          <div class="life-filter-group">
+            <button class="life-filter-btn active" onclick="filterLifeMedia('all', this)">Barchasi (<span id="count-all">0</span>)</button>
+            <button class="life-filter-btn" onclick="filterLifeMedia('image', this)">📸 Rasmlar</button>
+            <button class="life-filter-btn" onclick="filterLifeMedia('video', this)">🎬 Videolar</button>
+          </div>
+          <button class="btn-pill primary" onclick="openLifeUploadModal()">+ RASM / VIDEO JOYLASH</button>
+        </div>
+      </div>
+
+      <!-- GALEREYA GRIDI -->
+      <div class="life-grid" id="life-grid"></div>
+    </div>
+  </section>
+
+  <!-- 8. SERVICES SECTION -->
+  <section class="services-section" id="services-sec">
+    <h2 class="services-heading">YO'NALISHLAR VA XIZMATLAR</h2>
+
+    <div class="service-item active" onclick="toggleService(this)">
+      <div class="service-header">
+        <span>01 / ILMIY-TAHLILIY MAQOLALAR VA TADQIQOTLAR</span>
+        <span>+</span>
+      </div>
+      <div class="service-body">
+        Turizm iqtisodiyoti, statistika (SIAT ma'lumotlari tahlili), psixolingvistika hamda sun'iy intellekt integratsiyasi bo'yicha ilmiy maqolalar va tadqiqotlar olib borish.
+      </div>
+    </div>
+
+    <div class="service-item" onclick="toggleService(this)">
+      <div class="service-header">
+        <span>02 / VEB-SAYT VA INTERAKTIV PORTFOLIO YARATISH</span>
+        <span>+</span>
+      </div>
+      <div class="service-body">
+        Zamonaviy GSAP va 3D WebGL animatsiyalariga ega shaxsiy bloglar, korporativ saytlar va kreativ landing sahifalarini yuqori sifatda ishlab chiqish.
+      </div>
+    </div>
+
+    <div class="service-item" onclick="toggleService(this)">
+      <div class="service-header">
+        <span>03 / TAQDIMOTLAR VA MEDIA ISHLANMALAR</span>
+        <span>+</span>
+      </div>
+      <div class="service-body">
+        Biznes va turizmda tadbirkorlikni rivojlantirish bo'yicha professional taqdimotlar hamda AI asosidagi loyiha va video konsepsiyalarini ishlab chiqish.
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FOOTER LET'S TALK -->
+  <footer class="footer-section" id="footer-sec">
+    <h2 class="footer-big-title">BOG'LANISH</h2>
+    <div class="footer-socials">
+      <a href="https://t.me/erenyx" target="_blank" rel="noopener noreferrer" class="btn-pill primary">TELEGRAM (@erenyx)</a>
+      <a href="https://instagram.com/kiimsanov_" target="_blank" rel="noopener noreferrer" class="btn-pill outline">INSTAGRAM (@kiimsanov_)</a>
+      <button class="btn-pill outline" onclick="openLifeUploadModal()">📸 LIFE'GA RASM/VIDEO QO'SHISH</button>
+    </div>
+    <div class="footer-meta">
+      <span>KIMSANOV MUHAMMADDIYOR © 2026. BARCHA HUQUQLAR HIMOYALANGAN.</span>
+      <span>TOSHKENT, O'ZBEKISTON</span>
+    </div>
+  </footer>
+
+  <!-- FLOATING PULT -->
+  <div class="floating-controls">
+    <button class="ctrl-btn" onclick="replayPreloader()">00:00 Intro</button>
+    <button class="ctrl-btn" onclick="scrollToSec('#hero-sec')">Hero</button>
+    <button class="ctrl-btn" onclick="scrollToSec('#about-sec')">Men haqimda</button>
+    <button class="ctrl-btn" onclick="scrollToSec('#wave-sec')">Maqolalar</button>
+    <button class="ctrl-btn active" onclick="scrollToSec('#life-sec')">📸 Life Galereya</button>
+    <button class="ctrl-btn active" onclick="openLifeUploadModal()">+ Rasm/Video</button>
+  </div>
+
+  <!-- MAQOLA O'QISH MODALI -->
+  <div class="modal-backdrop" id="reader-modal">
+    <div class="modal-card article-reader-card">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+        <h2 id="reader-title">Maqola sarlavhasi</h2>
+        <button class="btn-pill outline" onclick="closeReaderModal()">✕ Yopish</button>
+      </div>
+      <div class="article-reader-meta" id="reader-meta">Muallif: Kimsanov Muhammaddiyor</div>
+      <div class="article-reader-body" id="reader-body"></div>
+    </div>
+  </div>
+
+  <!-- YANGI LOYIHA QO'SHISH MODALI -->
+  <div class="modal-backdrop" id="add-project-modal">
+    <div class="modal-card">
+      <h3>Yangi loyiha yoki maqola qo'shish</h3>
+      <div class="form-group">
+        <label>Yo'nalish tegi (masalan: 04 / BIZNES):</label>
+        <input type="text" id="new-proj-tag" placeholder="04 / LOYIHA" />
+      </div>
+      <div class="form-group">
+        <label>Loyiha yoki maqola nomi (Qisqa):</label>
+        <input type="text" id="new-proj-short" placeholder="Masalan: TURIZM TAQDIMOTI" />
+      </div>
+      <div class="form-group">
+        <label>To'liq sarlavha:</label>
+        <input type="text" id="new-proj-title" placeholder="Loyihaning to'liq sarlavhasi" />
+      </div>
+      <div class="form-group">
+        <label>Batafsil matn / Annotatsiya:</label>
+        <textarea id="new-proj-content" rows="5" placeholder="Loyiha yoki maqola matnini kiriting..."></textarea>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:18px;">
+        <button class="btn-pill outline" onclick="closeAddProjectModal()">Bekor qilish</button>
+        <button class="btn-pill primary" onclick="addNewProject()">Qo'shish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIFE RASM / VIDEO YUKLASH MODALI -->
+  <div class="modal-backdrop" id="life-upload-modal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <h3>📸 Life bo'limiga Rasm yoki Video joylash</h3>
+        <button class="btn-pill outline" onclick="closeLifeUploadModal()">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label>Media turi:</label>
+        <select id="life-media-type">
+          <option value="image">📸 Rasm (Foto)</option>
+          <option value="video">🎬 Video (MP4 / WebM / MOV)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>1-usul: Qurilmangizdan (Telefon yoki Kompyuterdan) fayl tanlang:</label>
+        <div class="file-drop-area" onclick="document.getElementById('life-file-input').click()">
+          <p id="file-chosen-label" style="font-size:0.88rem; color:#d4d4d8;">📂 Faylni tanlash uchun shu yerni bosing (Rasm yoki Video)</p>
+          <input type="file" id="life-file-input" accept="image/*,video/*" style="display:none" onchange="handleLifeFileSelect(this)" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Yoki 2-usul: Internetdagi tayyor Rasm/Video havolasi (URL):</label>
+        <input type="text" id="life-url-input" placeholder="https://..." />
+      </div>
+
+      <div class="form-group">
+        <label>Sarlavha (masalan: Toshkentda kuz / Universitetda / Sayohat):</label>
+        <input type="text" id="life-title-input" placeholder="Lavha sarlavhasi..." />
+      </div>
+
+      <div class="form-group">
+        <label>Qisqacha izoh yoki xotira:</label>
+        <textarea id="life-caption-input" rows="3" placeholder="Ushbu rasm yoki video haqida qisqacha yozing..."></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:18px;">
+        <button class="btn-pill outline" onclick="closeLifeUploadModal()">Bekor qilish</button>
+        <button class="btn-pill primary" id="life-save-btn" onclick="saveLifeMediaItem()">Galereyaga joylash</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX (RASM VA VIDEONI KATTA EKRANDA KO'RISH) -->
+  <div class="modal-backdrop" id="lightbox-modal">
+    <div class="modal-card lightbox-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <span id="lb-date" style="font-family:var(--font-mono); font-size:0.72rem; color:#9ca3af;"></span>
+          <h3 id="lb-title" style="margin:4px 0 0;"></h3>
+        </div>
+        <button class="btn-pill outline" onclick="closeLightboxModal()">✕ Yopish</button>
+      </div>
+      <div class="lightbox-media-box" id="lb-media-box"></div>
+      <p id="lb-caption" style="color:#d4d4d8; font-size:0.92rem; line-height:1.6;"></p>
+    </div>
+  </div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    // ILMIY MAQOLALAR VA LOYIHALAR BAZASI
+    const projectsData = [
+      {
+        id: 0,
+        tag: "01 / WEB PORTFOLIO",
+        shortTitle: "MUHAMMADDIYOR+",
+        subTitle: "Shaxsiy Portfolio & Ilmiy Blog",
+        bg: "#121316",
+        fullTitle: "MUHAMMADDIYOR+ — Shaxsiy Portfolio, Ilmiy Maqolalar va Life Platformasi",
+        author: "Kimsanov Muhammaddiyor • 2026",
+        contentHtml: `
+          <p>Ushbu interaktiv veb-sayt Kimsanov Muhammaddiyorning ilmiy-tahliliy maqolalari, turizm va sun'iy intellekt yo'nalishidagi tadqiqotlari hamda shaxsiy hayotidagi foto va videolarni (Life) jamlovchi shaxsiy platformadir.</p>
+          <h4>Texnik xususiyatlar:</h4>
+          <p>• Three.js (WebGL) asosidagi 3D to'lqinli kartochkalar;<br>• GSAP ScrollTrigger yordamida boshqariladigan portal va karusel animatsiyalari;<br>• Ilmiy maqolalarni o'qish va Life galereyasiga rasm/video yuklash moduli.</p>
+        `
+      },
+      {
+        id: 1,
+        tag: "02 / IQTISODIY TAHLIL & SI",
+        shortTitle: "TURIZM VA SI TAHLILI",
+        subTitle: "Turistlar oqimi va eksport (2020-2025)",
+        bg: "#1e293b",
+        fullTitle: "O'zbekistonda turistlar oqimi va turizm xizmatlari eksporti: iqtisodiy tahlil va sun'iy intellekt imkoniyatlari",
+        author: "Kimsanov Muhammaddiyor — TIIAME Milliy tadqiqot universiteti, Turizm va mehmondo'stlik yo'nalishi, 3-bosqich talabasi",
+        contentHtml: `
+          <h4>Annotatsiya</h4>
+          <p>Maqolada SIAT ma'lumotlari asosida 2020–2025-yillardagi xorijiy turistik tashriflar va «Safarlar (turizm)» xizmatlari eksportining o'sishi qiyoslanadi. Eksport 2021–2024-yillarda tashriflardan tezroq, 2025-yilda esa sekinroq o'sgan. Oxirgi yilda eksport 38,68% ga oshgan, bir tashrifga to'g'ri keladigan shartli eksport qiymati esa 5,52% ga pasaygan (442,24 dollardan 417,85 dollarga).</p>
+          <p><strong>Kalit so'zlar:</strong> turistik tashriflar, xizmatlar eksporti, o'sish mutanosibligi, shartli eksport qiymati, tashrif maqsadlari, sun'iy intellekt, mahalliy turizm korxonalari.</p>
+          <h4>1-jadval. Tashriflar va eksport dinamikasi (2020–2025)</h4>
+          <table class="article-table">
+            <thead>
+              <tr>
+                <th>Yil</th>
+                <th>Tashrif (ming)</th>
+                <th>Eksport (mln USD)</th>
+                <th>Tashrif o'sishi (%)</th>
+                <th>Eksport o'sishi (%)</th>
+                <th>Shartli qiymat (USD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2020</td><td>1 504,1</td><td>255,8</td><td>—</td><td>—</td><td>170,07</td></tr>
+              <tr><td>2021</td><td>1 881,3</td><td>422,1</td><td>25,08%</td><td>65,01%</td><td>224,37</td></tr>
+              <tr><td>2022</td><td>5 232,8</td><td>1 609,8</td><td>178,15%</td><td>281,38%</td><td>307,64</td></tr>
+              <tr><td>2023</td><td>6 626,3</td><td>2 143,1</td><td>26,63%</td><td>33,13%</td><td>323,42</td></tr>
+              <tr><td>2024</td><td>7 957,2</td><td>3 519,0</td><td>20,09%</td><td>64,20%</td><td>442,24</td></tr>
+              <tr><td>2025</td><td>11 679,6</td><td>4 880,3</td><td>46,78%</td><td>38,68%</td><td>417,85</td></tr>
+            </tbody>
+          </table>
+          <h4>Xulosa va SI taklifi</h4>
+          <p>Turistik talab va mahalliy xizmatlar taklifini Sun'iy Intellekt (SI) asosida muvofiqlashtirish mexanizmi taklif etiladi: (1) tekshirilgan katalog → (2) ixtiyoriy ehtiyojlar va qat'iy cheklovlar bo'yicha saralash → (3) mos xizmatlarni birlashtirish → (4) mavjudlikni qayta tekshirib bronlash va to'lov → (5) xizmatni bajarish → (6) qayta aloqa.</p>
+        `
+      },
+      {
+        id: 2,
+        tag: "03 / PSIXOLINGVISTIKA",
+        shortTitle: "PSIXOLINGVISTIKA",
+        subTitle: "O'zbek va ingliz tillarida hissiyotlar",
+        bg: "#31102f",
+        fullTitle: "Oʻzbek va ingliz tillarida hissiyotlarni ifodalashning psixolingvistik xususiyatlari: hissiy masofalanish va kommunikativ erkinlik",
+        author: "Kimsanov Muhammaddiyor — TIIAME Milliy tadqiqot universiteti, Turizm va mehmondo'stlik yo'nalishi, 3-bosqich talabasi",
+        contentHtml: `
+          <h4>Annotatsiya</h4>
+          <p>Maqolada oʻzbek va ingliz tillarida shaxsiy hissiyotlarni ifodalashning ikki jihati — iboraning hissiy ta'sir kuchi va uni aytishdagi qulaylik alohida tahlil qilindi. Empirik material sifatida 50 nafar tanish, do'st va yaqinlar bilan oʻtkazilgan og'zaki suhbatlardan foydalanildi.</p>
+          <p><strong>Kalit so'zlar:</strong> psixolingvistika, bilingvizm, hissiy rezonans, ona tili, chet tili, hissiy masofalanish, kommunikativ erkinlik, muloqot muhiti, til tanlovi.</p>
+          <h4>Tadqiqotning markaziy masalasi</h4>
+          <p>Nima sababdan ayrim insonlar muayyan hissiy fikrni ona tilida aytishga tortinadi, chet tilida esa o'zini erkinroq his qiladi? Maqolada «hissiy rezonans» iboraning subyektiv ta'sir kuchi, «kommunikativ erkinlik» esa shu iborani suhbatda aytishning qulayligi sifatida farqlanadi.</p>
+        `
+      }
+    ];
+
+    // 1. PRELOADER WAVY RING ANIMATION
+    const ringPath = document.getElementById('wavy-ring');
+    const ringDot = document.getElementById('ring-dot');
+    let waveTime = 0;
+    let preloaderActive = true;
+
+    function animatePreloaderRing() {
+      if (!preloaderActive) return;
+      waveTime += 0.06;
+      const cx = 150, cy = 150, baseR = 96;
+      let d = '';
+      const steps = 120;
+      for (let i = 0; i <= steps; i++) {
+        const theta = (i / steps) * Math.PI * 2;
+        const wave = Math.sin(theta * 10 + waveTime) * 6 + Math.cos(theta * 6 - waveTime * 0.8) * 4;
+        const r = baseR + wave;
+        const x = cx + r * Math.cos(theta);
+        const y = cy + r * Math.sin(theta);
+        d += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
+      }
+      d += 'Z';
+      ringPath.setAttribute('d', d);
+
+      const dotAngle = waveTime * 0.7;
+      const dotR = baseR + Math.sin(dotAngle * 10 + waveTime) * 6;
+      ringDot.setAttribute('cx', (cx + dotR * Math.cos(dotAngle)).toFixed(1));
+      ringDot.setAttribute('cy', (cy + dotR * Math.sin(dotAngle)).toFixed(1));
+
+      requestAnimationFrame(animatePreloaderRing);
+    }
+    animatePreloaderRing();
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+        preloaderActive = false;
+      }, 1300);
+    });
+
+    function replayPreloader() {
+      const el = document.getElementById('preloader');
+      el.classList.remove('hidden');
+      preloaderActive = true;
+      animatePreloaderRing();
+      setTimeout(() => {
+        el.classList.add('hidden');
+        preloaderActive = false;
+      }, 2000);
+    }
+
+    // 2. HERO PARALLAX
+    window.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 18;
+      const y = (e.clientY / window.innerHeight - 0.5) * 12;
+      gsap.to('#hero-NeedParallax', { x, y, duration: 0.6, ease: 'power2.out' });
+    });
+
+    // 3. ABOUT ME SCROLL-ZOOM PORTAL
+    const aboutTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#about-sec',
+        start: 'top top',
+        end: '+=150%',
+        pin: true,
+        scrub: 1
+      }
+    });
+    aboutTl
+      .to('#split-left', { x: -260, opacity: 0, duration: 1 }, 0)
+      .to('#split-right', { x: 260, opacity: 0, duration: 1 }, 0)
+      .to('#portal-box', { width: '100vw', height: '100vh', borderRadius: 0, duration: 1.2, ease: 'power2.inOut' }, 0)
+      .to('#portal-ui', { opacity: 1, duration: 0.8 }, 0.6);
+
+    // 4. HORIZONTAL SCROLL EXPERIENCE
+    const expTrack = document.getElementById('exp-track');
+    gsap.to(expTrack, {
+      x: () => -(expTrack.scrollWidth - window.innerWidth + 120),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#exp-sec',
+        start: 'top top',
+        end: '+=160%',
+        pin: true,
+        scrub: 1
+      }
+    });
+
+    // 5. THREE.JS 3D WAVY RIBBON CAROUSEL
+    let threeGroup, threeMeshes = [];
+    function initThreeWave() {
+      const container = document.getElementById('wave-canvas-container');
+      container.innerHTML = '';
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.z = 7;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      threeGroup = new THREE.Group();
+      scene.add(threeGroup);
+      threeMeshes = [];
+
+      projectsData.forEach((item, idx) => {
+        const cvs = document.createElement('canvas');
+        cvs.width = 560; cvs.height = 340;
+        const ctx = cvs.getContext('2d');
+        ctx.fillStyle = item.bg || '#141519';
+        ctx.fillRect(0, 0, 560, 340);
+        ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+        ctx.lineWidth = 6;
+        ctx.strokeRect(12, 12, 536, 316);
+
+        ctx.fillStyle = '#9ca3af';
+        ctx.font = '20px Space Mono, monospace';
+        ctx.fillText(item.tag, 34, 65);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 36px Inter, sans-serif';
+        ctx.fillText(item.shortTitle, 34, 155);
+
+        ctx.fillStyle = '#d1d5db';
+        ctx.font = '22px Inter, sans-serif';
+        ctx.fillText(item.subTitle, 34, 205);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '18px Space Mono, monospace';
+        ctx.fillText('[ O\'QISH UCHUN TUGMANI BOSING ]', 34, 285);
+
+        const tex = new THREE.CanvasTexture(cvs);
+        const geo = new THREE.PlaneGeometry(3.3, 2.0, 32, 32);
+        const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.x = (idx - (projectsData.length - 1) / 2) * 3.6;
+        mesh.userData = { baseGeo: geo.attributes.position.clone(), offset: idx * 1.4 };
+        threeGroup.add(mesh);
+        threeMeshes.push(mesh);
+      });
+
+      gsap.to(threeGroup.position, {
+        x: -2.4,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#wave-sec',
+          start: 'top top',
+          end: '+=120%',
+          pin: true,
+          scrub: 1
+        }
+      });
+
+      let clock = 0;
+      function renderLoop() {
+        clock += 0.035;
+        threeMeshes.forEach((m) => {
+          const pos = m.geometry.attributes.position;
+          const base = m.userData.baseGeo;
+          for (let i = 0; i < pos.count; i++) {
+            const x = base.getX(i);
+            const z = Math.sin(x * 1.8 + clock + m.userData.offset) * 0.25;
+            pos.setZ(i, z);
+          }
+          pos.needsUpdate = true;
+        });
+        renderer.render(scene, camera);
+        requestAnimationFrame(renderLoop);
+      }
+      renderLoop();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+
+    // 6. WORKS '26 WHEEL RENDER
+    let wheelTl;
+    function renderWheelProjects() {
+      const wheelStage = document.getElementById('wheel-stage');
+      const sideList = document.getElementById('wheel-side-list');
+      wheelStage.innerHTML = '';
+
+      let sideHtml = '<strong>MAVJUD LOYIHALAR (' + projectsData.length + ' TA):</strong><br>';
+      const wheelCards = [];
+      const radius = 240;
+      const count = projectsData.length;
+
+      projectsData.forEach((p, i) => {
+        const card = document.createElement('div');
+        card.className = 'wheel-card';
+        card.style.background = p.bg || '#141416';
+        card.onclick = () => openProjectReader(i);
+        card.innerHTML = `
+          <div class="wheel-card-tag">${p.tag}</div>
+          <div class="wheel-card-title">${p.shortTitle}<br><span style="font-size:0.8rem;font-weight:400;color:#bbb;">${p.subTitle}</span></div>
+          <div class="wheel-card-action">BATAFSIL O'QISH ↗</div>
+        `;
+        wheelStage.appendChild(card);
+
+        const angleDeg = (360 / count) * i;
+        const angleRad = angleDeg * (Math.PI / 180);
+        gsap.set(card, {
+          x: Math.cos(angleRad) * radius,
+          y: Math.sin(angleRad) * radius,
+          rotation: angleDeg + 90
+        });
+        wheelCards.push(card);
+
+        sideHtml += `<a onclick="openProjectReader(${i})">0${i + 1}. ${p.shortTitle} ↗</a>`;
+      });
+
+      sideList.innerHTML = sideHtml;
+
+      if (wheelTl) wheelTl.kill();
+      wheelTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#wheel-sec',
+          start: 'top top',
+          end: '+=160%',
+          pin: true,
+          scrub: 1
+        }
+      });
+
+      wheelTl.to(wheelStage, { rotation: 120, duration: 1, ease: 'none' }, 0);
+      wheelCards.forEach((card, i) => {
+        const mid = (count - 1) / 2;
+        wheelTl.to(card, {
+          x: 0,
+          y: (i - mid) * 145,
+          rotation: -120,
+          rotateX: (i - mid) * -10,
+          scale: 1.06,
+          duration: 1.2,
+          ease: 'power2.inOut'
+        }, 1);
+      });
+    }
+
+    initThreeWave();
+    renderWheelProjects();
+
+    // ==========================================================
+    // 7. LIFE BO'LIMI (INDEXEDDB BILAN RASM VA VIDEO SAQLASH)
+    // ==========================================================
+    let lifeItems = [];
+    let currentLifeFilter = 'all';
+    let selectedFileDataUrl = null;
+    let dbInstance = null;
+
+    function initLifeDB() {
+      const request = indexedDB.open('MuhammaddiyorLifeDB', 1);
+      request.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('media')) {
+          db.createObjectStore('media', { keyPath: 'id' });
+        }
+      };
+      request.onsuccess = (e) => {
+        dbInstance = e.target.result;
+        loadLifeItemsFromDB();
+      };
+      request.onerror = () => {
+        renderLifeGrid();
+      };
+    }
+
+    function loadLifeItemsFromDB() {
+      if (!dbInstance) return;
+      const tx = dbInstance.transaction('media', 'readonly');
+      const store = tx.objectStore('media');
+      const req = store.getAll();
+      req.onsuccess = () => {
+        lifeItems = (req.result || []).sort((a, b) => b.id - a.id);
+        renderLifeGrid();
+      };
+    }
+
+    function renderLifeGrid() {
+      const grid = document.getElementById('life-grid');
+      document.getElementById('count-all').textContent = lifeItems.length;
+
+      const filtered = currentLifeFilter === 'all'
+        ? lifeItems
+        : lifeItems.filter(item => item.type === currentLifeFilter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="life-empty-box">
+            <h4>📸 "Life" galereyangiz hozircha bo'sh</h4>
+            <p>Shaxsiy rasmlaringiz, sayohat lavhalari yoki videolaringizni bitta-bitta joylab borishingiz mumkin. Ular brauzeringiz xotirasida saqlanib qoladi.</p>
+            <button class="btn-pill primary" onclick="openLifeUploadModal()">+ Birinchi Rasm yoki Videoni joylash</button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="life-card" onclick="openLightbox(${item.id})">
+          <span class="life-card-badge">${item.type === 'video' ? '🎬 VIDEO' : '📸 FOTO'}</span>
+          <button class="life-card-delete" title="O'chirish" onclick="deleteLifeItem(event, ${item.id})">✕</button>
+          ${item.type === 'video'
+            ? `<video src="${item.src}" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>`
+            : `<img src="${item.src}" alt="${item.title}" loading="lazy" />`
+          }
+          <div class="life-card-overlay">
+            <div class="life-card-date">${item.date}</div>
+            <div class="life-card-title">${item.title}</div>
+            <div class="life-card-caption">${item.caption || ''}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterLifeMedia(type, btnEl) {
+      currentLifeFilter = type;
+      document.querySelectorAll('.life-filter-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      renderLifeGrid();
+    }
+
+    function openLifeUploadModal() {
+      selectedFileDataUrl = null;
+      document.getElementById('life-file-input').value = '';
+      document.getElementById('file-chosen-label').textContent = '📂 Faylni tanlash uchun shu yerni bosing (Rasm yoki Video)';
+      document.getElementById('life-url-input').value = '';
+      document.getElementById('life-title-input').value = '';
+      document.getElementById('life-caption-input').value = '';
+      document.getElementById('life-upload-modal').classList.add('open');
+    }
+
+    function closeLifeUploadModal() {
+      document.getElementById('life-upload-modal').classList.remove('open');
+    }
+
+    function handleLifeFileSelect(input) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      document.getElementById('file-chosen-label').textContent = '✅ Tanlandi: ' + file.name;
+      if (file.type.startsWith('video/')) {
+        document.getElementById('life-media-type').value = 'video';
+      } else if (file.type.startsWith('image/')) {
+        document.getElementById('life-media-type').value = 'image';
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        selectedFileDataUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveLifeMediaItem() {
+      const type = document.getElementById('life-media-type').value;
+      const urlVal = document.getElementById('life-url-input').value.trim();
+      const title = document.getElementById('life-title-input').value.trim() || 'Muhammaddiyor — Life lavha';
+      const caption = document.getElementById('life-caption-input').value.trim();
+
+      const finalSrc = selectedFileDataUrl || urlVal;
+      if (!finalSrc) {
+        alert('Iltimos, qurilmangizdan rasm/video fayl tanlang yoki havola (URL) kiriting!');
+        return;
+      }
+
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('uz-UZ', { year: 'numeric', month: 'short', day: 'numeric' });
+
+      const newItem = {
+        id: Date.now(),
+        type,
+        src: finalSrc,
+        title,
+        caption,
+        date: dateStr
+      };
+
+      if (dbInstance) {
+        const tx = dbInstance.transaction('media', 'readwrite');
+        tx.objectStore('media').put(newItem);
+        tx.oncomplete = () => {
+          lifeItems.unshift(newItem);
+          renderLifeGrid();
+          closeLifeUploadModal();
+        };
+      } else {
+        lifeItems.unshift(newItem);
+        renderLifeGrid();
+        closeLifeUploadModal();
+      }
+    }
+
+    function deleteLifeItem(e, id) {
+      e.stopPropagation();
+      if (dbInstance) {
+        const tx = dbInstance.transaction('media', 'readwrite');
+        tx.objectStore('media').delete(id);
+        tx.oncomplete = () => {
+          lifeItems = lifeItems.filter(item => item.id !== id);
+          renderLifeGrid();
+        };
+      } else {
+        lifeItems = lifeItems.filter(item => item.id !== id);
+        renderLifeGrid();
+      }
+    }
+
+    function openLightbox(id) {
+      const item = lifeItems.find(x => x.id === id);
+      if (!item) return;
+      document.getElementById('lb-date').textContent = item.date + ' // ' + (item.type === 'video' ? 'VIDEO' : 'FOTO');
+      document.getElementById('lb-title').textContent = item.title;
+      document.getElementById('lb-caption').textContent = item.caption || '';
+      const box = document.getElementById('lb-media-box');
+      if (item.type === 'video') {
+        box.innerHTML = `<video src="${item.src}" controls autoplay playsinline></video>`;
+      } else {
+        box.innerHTML = `<img src="${item.src}" alt="${item.title}" />`;
+      }
+      document.getElementById('lightbox-modal').classList.add('open');
+    }
+
+    function closeLightboxModal() {
+      document.getElementById('lb-media-box').innerHTML = '';
+      document.getElementById('lightbox-modal').classList.remove('open');
+    }
+
+    initLifeDB();
+
+    // READER MODAL FUNCTIONS
+    function openProjectReader(index) {
+      const item = projectsData[index];
+      if (!item) return;
+      document.getElementById('reader-title').textContent = item.fullTitle;
+      document.getElementById('reader-meta').textContent = item.author;
+      document.getElementById('reader-body').innerHTML = item.contentHtml;
+      document.getElementById('reader-modal').classList.add('open');
+    }
+    function closeReaderModal() {
+      document.getElementById('reader-modal').classList.remove('open');
+    }
+
+    // ADD NEW PROJECT MODAL
+    function openAddProjectModal() {
+      document.getElementById('add-project-modal').classList.add('open');
+    }
+    function closeAddProjectModal() {
+      document.getElementById('add-project-modal').classList.remove('open');
+    }
+    function addNewProject() {
+      const tag = document.getElementById('new-proj-tag').value || `0${projectsData.length + 1} / LOYIHA`;
+      const shortTitle = document.getElementById('new-proj-short').value || 'YANGI LOYIHA';
+      const fullTitle = document.getElementById('new-proj-title').value || shortTitle;
+      const content = document.getElementById('new-proj-content').value || '';
+
+      projectsData.push({
+        id: projectsData.length,
+        tag: tag.toUpperCase(),
+        shortTitle: shortTitle.toUpperCase(),
+        subTitle: fullTitle.slice(0, 38),
+        bg: '#1f2937',
+        fullTitle: fullTitle,
+        author: 'Kimsanov Muhammaddiyor • 2026',
+        contentHtml: `<p>${content.replace(/\n/g, '</p><p>')}</p>`
+      });
+
+      closeAddProjectModal();
+      initThreeWave();
+      renderWheelProjects();
+      ScrollTrigger.refresh();
+    }
+
+    // SERVICES TOGGLE
+    function toggleService(el) {
+      document.querySelectorAll('.service-item').forEach(item => item.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function scrollToSec(selector) {
+      gsap.to(window, { duration: 1, scrollTo: selector, ease: 'power3.inOut' });
+    }
+  </script>
+</body>
+</html>
